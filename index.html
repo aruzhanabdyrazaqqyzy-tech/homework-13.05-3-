@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: rgb(255, 54, 54);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+    .container{
+        background-color: rgb(0, 0, 29);
+        border-radius: 5px;
+        width: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+    .top{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+    input{
+        border: none;
+        background-color: lightgray;
+        color: white;
+        width: 250px;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    button{
+        padding: 10px;
+        background-color:rgb(255, 54, 54) ;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        width: 100px;
+    }
+    button:hover{
+        box-shadow: 0 0 15px 0 red;
+    }
+    .box{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: sans-serif;
+        gap: 10px;
+    }
+    img{
+        border-radius: 50%;
+        border: 1px solid white;
+        width: 200px;
+    }
+    h2{
+        color: white;
+    }
+    p{
+        color: lightgray;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="top">
+            <input type="search" placeholder="search">
+            <button>Submit</button>
+        </div>
+        <div class="box">
+            <img src="">
+            <h2><b></b></h2>
+            <p></p>
+        </div>
+    </div>
+    <script>
+        const input = document.querySelector("input");
+        const btn = document.querySelector("button");
+        const img = document.querySelector("img");
+        const nameUser = document.querySelector("h2");
+        const bio = document.querySelector("p");
+
+        async function githubUser() {
+            const username = input.value;
+            const url =
+            `https://api.github.com/users/${username}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            console.log(data);
+            img.src = data.avatar_url;
+            nameUser.innerHTML = data.login;
+            bio.innerHTML = data.bio;
+        }
+
+        btn.addEventListener("click", githubUser);
+</script>
+</body>
+</html>
